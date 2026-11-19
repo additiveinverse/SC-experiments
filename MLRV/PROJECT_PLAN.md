@@ -17,6 +17,16 @@ Build a playable SuperCollider reimplementation of the mlr live sample-cutter. T
 - Start with 6 lanes x 8 cut positions, leaving controls on the grid/outer buttons. Keep playback independent of this mapping.
 - Keep MLR as a standalone grid sample-cutter application.
 
+## Lean Interface Concept (Provisional)
+
+Explore a compact 2x8 performance layout as a separate interface experiment, not yet a replacement for the 6-lane mapping above:
+
+- The lower row's buttons 1-8 trigger captured audio slices.
+- `R` records the incoming audio stream.
+- `D` deletes or clears the lane and starts over.
+- Candidate controls include Open, three function buttons with behavior still to be determined, a second Open action, and Delete. Their exact placement and whether the two Open actions differ are unresolved.
+- A separate function may capture a played grid sequence for later resequencing; this is distinct from recording incoming audio with `R`.
+
 ## Milestones
 
 1. Validate `mlr_engine.scd`: sample loading, repeat/tempo fit, immediate cuts, quantized cuts, and lane replacement/cleanup.
