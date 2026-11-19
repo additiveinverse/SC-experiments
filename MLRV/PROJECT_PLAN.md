@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Build a playable SuperCollider reimplementation of the mlr live sample-cutter. This is a standalone project, separate from taktBerryPi.
+Build a playable SuperCollider reimplementation of the mlr live sample-cutter. This is a standalone project.
 
 ## Current State
 
@@ -15,7 +15,7 @@ Build a playable SuperCollider reimplementation of the mlr live sample-cutter. T
 
 - Launchpad Pro MK3 is the intended controller; verify its MIDI mapping and LED feedback on the actual device.
 - Start with 6 lanes x 8 cut positions, leaving controls on the grid/outer buttons. Keep playback independent of this mapping.
-- Keep MLR as a standalone grid sample-cutter application. Do not merge its playback engine into taktBerryPi.
+- Keep MLR as a standalone grid sample-cutter application.
 
 ## Milestones
 
@@ -37,7 +37,7 @@ Six lanes can load and play samples; pad presses cut to the expected position at
 
 ## Guardrails
 
-- Keep MLR independent of the taktBerryPi voice-module project.
+- Keep MLR independent as a standalone application.
 - Keep sample content licensed for the intended use.
 - Machine-level audio and MIDI settings (output device, channel counts, sample rate, MIDI connections) belong in `startup.scd`, not in project files. A project file that assigns `s.options.*` silently overrides the machine's settings, and a `nil` assignment resets them to the default. Before adding any such line to a project file, state what it overrides, what happens on a machine that lacks it, and how it was verified; prefer reading the setting and warning over assigning it.
 - MIDI Clock source selection and MIDI endpoint connections also belong in `startup.scd`; the engine should register only a listener for the explicitly selected source.

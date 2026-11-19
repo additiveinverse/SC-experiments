@@ -2,9 +2,9 @@
 
 ## Purpose
 
-Make a straight behavioral port of the monome 64 Polygome instrument to SuperCollider. Use the Launchpad Pro MK3 in Custom mode 7 as the grid controller and send sequenced MIDI notes to an external hardware synth. This is a standalone sequencer/controller prototype, not a synth and not a required part of TaktBerryPi or MLR.
+Make a straight behavioral port of the monome 64 Polygome instrument to SuperCollider. Use the Launchpad Pro MK3 in Custom mode 7 as the grid controller and send sequenced MIDI notes to an external hardware synth. This is a standalone sequencer/controller prototype, not a synth.
 
-The goal is to preserve Polygome's musical behavior, not recreate the Max interface. Any future TaktBerryPi connection is optional.
+The goal is to preserve Polygome's musical behavior, not recreate the Max interface.
 
 ## Reference and Port Boundary
 
@@ -18,7 +18,7 @@ The goal is to preserve Polygome's musical behavior, not recreate the Max interf
 
 - `polygnome.scd` has a first controller-independent core: seven pattern slots, up to eight steps, record/play APIs, velocity and duration setters, note callbacks, and a source-filtered MIDI Clock listener with a default-BPM fallback.
 - Clock handling currently estimates tempo from MIDI Clock pulses and updates a `TempoClock`; it is not yet a pulse-locked scheduler.
-- Note callbacks currently log by default. There is an optional TaktBerry callback, but no standalone hardware MIDI output adapter.
+- Note callbacks currently log by default; there is no standalone hardware MIDI output adapter.
 - No Launchpad Custom mode adapter or verified note/channel map exists yet. MIDI channel 14 is only a hypothesis.
 - No runtime behavior test has been completed on the target Launchpad or a hardware synth.
 
@@ -28,7 +28,7 @@ The goal is to preserve Polygome's musical behavior, not recreate the Max interf
 - Use one explicitly selected Launchpad MIDI input source and one explicitly selected synth MIDI output destination. Do not listen to or transmit through every MIDI endpoint by default.
 - MIDI Clock is channel-less. Prefer clock from the configured external MIDI source; use the configured internal BPM when clock is absent. MIDI Stop is an intentional transport stop, not clock loss.
 - Put MIDI endpoint IDs and device connections in `startup.scd`; do not set SuperCollider audio-server options in this project.
-- Keep the note-output callback independent of the destination so hardware MIDI output is the primary adapter and TaktBerry can remain an optional later adapter.
+- Keep the note-output callback independent of the destination so hardware MIDI output is the primary adapter.
 
 ## Milestones
 
@@ -47,7 +47,7 @@ The goal is to preserve Polygome's musical behavior, not recreate the Max interf
 - At least seven patterns of up to eight steps can be recorded and played with the documented modes and hold behavior.
 - Patterns can sound polyphonically through a selected hardware synth; velocity and note duration are correct, and stop/panic leaves no stuck notes.
 - External MIDI Clock controls the sequencer when present; the configured internal BPM is used when clock is absent, and a deliberate MIDI Stop does not trigger free-running fallback.
-- The standalone project works without TaktBerryPi, MLR, or a SuperCollider audio server.
+- The standalone project works without MLR or a SuperCollider audio server.
 
 ## Open Questions
 
@@ -59,7 +59,7 @@ The goal is to preserve Polygome's musical behavior, not recreate the Max interf
 ## Guardrails
 
 - No synth engine or audio-server setup in this project.
-- No dependency on TaktBerryPi or MLR; integrations remain optional.
+- No dependency on MLR; integrations remain optional.
 - Do not assume Launchpad note mappings, MIDI channel, or clock source before probing the actual hardware.
 - Keep project-level MIDI routing explicit and machine-level MIDI/audio configuration in `startup.scd`.
 
